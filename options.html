@@ -1,0 +1,67 @@
+<!doctype html> <html> <head> <meta charset="utf-8"/> <meta name="viewport" content="width=device-width,initial-scale=1"/> <title>Privacy Inventory</title> <link rel="stylesheet" href="options.css"/> </head> <body> <div class="wrap"> <h1>Privacy Inventory</h1> <div class="controls"> <input id="search" placeholder="Search domain (e.g. amazon.com)"/> <select id="filter"> <option value="ALL">All</option> <option value="EMAIL">Email</option> <option value="CARD">Card</option> </select> <button id="refresh">Refresh</button><button id="exportJson">Export JSON</button>
+<label class="fileBtn">
+  Import CSV
+  <input id="importCsv" type="file" accept=".csv" />
+</label>
+<button id="clearAll" class="danger">Clear all</button>
+ </div>
+ <div class="env" id="envBox"> <div class="envHead"> <strong>Environment / Health</strong> <button id="btnEnvRefresh">Re-check</button> </div> <div class="envGrid"> <div><span class="k">Context</span> <span class="v" id="envContext">—</span></div> <div><span class="k">Incognito allowed</span> <span class="v" id="envIncAllowed">—</span></div> <div><span class="k">Incognito now</span> <span class="v" id="envIncNow">—</span></div> <div><span class="k">File URLs allowed</span> <span class="v" id="envFileAllowed">—</span></div> <div><span class="k">Service worker</span> <span class="v" id="envWorker">—</span></div> <div><span class="k">Records</span> <span class="v" id="envRecords">—</span></div>
+<div class="envIp">
+  <span class="k">Public IP</span>
+  <span class="v" id="envIp">Not checked</span>
+  <button id="btnCheckIp">Check IP</button>
+</div>
+
+</div> <details class="howto"> <summary>How buttons work (quick help)</summary> <ul> <li><b>Refresh</b>: reloads records from local storage.</li> <li><b>Export JSON</b>: downloads your local records as a JSON backup.</li> <li><b>Import CSV</b>: imports sites from a password manager/Chrome export (adds as EMAIL entries).</li> <li><b>Clear all</b>: deletes ALL local records (cannot be undone).</li> <li><b>Open</b> (per site): opens the details drawer for that domain.</li> <li><b>Mark as deleted on site</b>: sets status to “USER_DELETED_ON_SITE” for that site’s types.</li> <li><b>Open deletion help</b>: shows quick links and steps to remove your data on that site.</li> <li><b>Delete from history (local)</b>: removes that site’s records from this extension only.</li> <li><b>Save notes</b>: stores your notes locally for that domain.</li> </ul> </details> </div>
+<div id="stats" class="stats"></div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Site</th>
+      <th>Data</th>
+      <th>Last seen</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<div id="drawer" class="drawer hidden">
+  <div class="drawerHead">
+    <div>
+      <div id="d_domain" class="drawerTitle"></div>
+      <div id="d_meta" class="drawerMeta"></div>
+    </div>
+    <button id="closeDrawer">✕</button>
+  </div>
+
+  <div class="drawerBody">
+    <div class="section">
+      <h3>Detected data types</h3>
+      <div id="d_types"></div>
+    </div>
+
+    <div class="section">
+      <h3>Seen on paths</h3>
+      <div id="d_paths" class="chips"></div>
+    </div>
+
+    <div class="section">
+      <h3>Actions</h3>
+      <button id="btnMarkDeleted">Mark as deleted on site</button>
+      <button id="btnOpenHelp">Open deletion help</button>
+      <button id="btnDeleteLocal" class="danger">Delete from history (local)</button>
+    </div>
+
+    <div class="section">
+      <h3>Notes</h3>
+      <textarea id="d_notes" placeholder="Write note… (e.g. deleted account on Jan 9)"></textarea>
+      <button id="btnSaveNotes">Save notes</button>
+    </div>
+
+    <div id="help" class="help hidden"></div>
+  </div>
+</div>
+
+</div> <script src="options.js"></script> </body> </html>
